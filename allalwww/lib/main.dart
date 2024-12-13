@@ -1,3 +1,4 @@
+import 'package:allalwww/AddProduct.dart';
 import 'package:allalwww/Test.dart';
 import 'package:flutter/material.dart';
 
@@ -102,30 +103,32 @@ class HomePage extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 40),
       child: Column(
         children: [
-          _buildButtonRow(context, 'Images/5.jpg'),
+          _buildButtonRow(context, 'Images/5.jpg', const Test()),
           const SizedBox(height: 20),
-          _buildButtonRow(context, 'Images/NongNINE.jpg'),
+          _buildButtonRow(context, 'Images/NongNINE.jpg', AddProductPage())
         ],
       ),
     );
   }
 
-  Widget _buildButtonRow(BuildContext context, String imagePath) {
+  Widget _buildButtonRow(
+      BuildContext context, String imagePath, Widget targetPage) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        _buildNavButton(context, 'Images/NongNINE.jpg'),
-        _buildNavButton(context, 'Images/5.jpg'),
+        _buildNavButton(context, 'Images/5.jpg', const Test()),
+        _buildNavButton(context, 'Images/NongNINE.jpg', AddProductPage()),
       ],
     );
   }
 
-  Widget _buildNavButton(BuildContext context, String imagePath) {
+  Widget _buildNavButton(
+      BuildContext context, String imagePath, Widget targetPage) {
     return GestureDetector(
       onTap: () {
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => const Test()),
+          MaterialPageRoute(builder: (context) => targetPage),
         );
       },
       child: _buildImageBox(imagePath),
