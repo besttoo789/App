@@ -103,9 +103,10 @@ class HomePage extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 40),
       child: Column(
         children: [
-          _buildButtonRow(context, 'Images/5.jpg', const Test()),
+          _buildButtonRow(context, 'Images/5.jpg', const Test()), //เช็คสต็อก
           const SizedBox(height: 20),
-          _buildButtonRow(context, 'Images/NongNINE.jpg', AddProductPage())
+          _buildButtonRow(context, 'Images/NongNINE.jpg',
+              AddProductPage()) //ประวัติการเพิ่ม- ลด
         ],
       ),
     );
@@ -116,8 +117,11 @@ class HomePage extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        _buildNavButton(context, 'Images/5.jpg', const Test()),
-        _buildNavButton(context, 'Images/NongNINE.jpg', AddProductPage()),
+        _buildNavButton(
+            context, 'Images/5.jpg', AddProductPage()), // เพิ่มไอเท็ม
+        const SizedBox(height: 20),
+        _buildNavButton(
+            context, 'Images/NongNINE.jpg', AddProductPage()), //ลดไอเท็ม
       ],
     );
   }
