@@ -71,9 +71,10 @@ class HomePage extends StatelessWidget {
   Widget _buildImageWithBox(BuildContext context) {
     return Container(
       alignment: Alignment.center,
-      padding: const EdgeInsets.all(60),
+      padding: const EdgeInsets.all(0),
       child: Container(
-        width: 400,
+        width: 300,
+        height: 200,
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(12),
