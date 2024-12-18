@@ -1,3 +1,4 @@
+import 'package:allalwww/AddProduct.dart';
 import 'package:allalwww/Test.dart';
 import 'package:flutter/material.dart';
 
@@ -9,74 +10,55 @@ class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
   @override
-  Widget build(BuildContext context) => MaterialApp(
-        debugShowCheckedModeBanner: false,
-        theme: ThemeData.light(useMaterial3: false).copyWith(
-          iconTheme: const IconThemeData(color: Colors.white),
-        ),
-        home: const HomePage(),
-      );
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData.light(useMaterial3: false).copyWith(
+        iconTheme: const IconThemeData(color: Colors.white),
+      ),
+      home: const HomePage(),
+    );
+  }
 }
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
   @override
-  Widget build(BuildContext context) => Scaffold(
-        backgroundColor: Colors.white, // Change background color
-        body: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            // Add SizedBox to make the image appear lower
-            _buildImageLayout(context),
-            const SizedBox(height: 40),
-            // Buttons in the middle of the screen, 4 buttons
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 40),
-              child: Column(
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      _buildNavButton(context, 'Images/5.jpg', () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => const Test()),
-                        );
-                      }),
-                      _buildNavButton(context, 'Images/5.jpg', () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => const Test()),
-                        );
-                      }),
-                    ],
-                  ),
-                  const SizedBox(height: 20),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      _buildNavButton(context, 'Images/5.jpg', () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => const Test()),
-                        );
-                      }),
-                      _buildNavButton(context, 'Images/5.jpg', () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => const Test()),
-                        );
-                      }),
-                    ],
-                  ),
-                ],
-              ),
-            ),
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Colors.white,
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          _buildImageLayout(context),
+          const SizedBox(height: 10),
+          _buildButtonGrid(context),
+        ],
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          _showMenu(context);
+        },
+        child: const Icon(Icons.qr_code_scanner, color: Colors.white),
+        backgroundColor: const Color.fromARGB(255, 0, 0, 0),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
+      bottomNavigationBar: BottomAppBar(
+        color: Colors.green,
+        shape: const CircularNotchedRectangle(),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: const [
+            IconButton(onPressed: null, icon: Icon(Icons.home)),
+            IconButton(onPressed: null, icon: Icon(Icons.warehouse)),
+            IconButton(onPressed: null, icon: Icon(Icons.person)),
           ],
         ),
-      );
+      ),
+    );
+  }
 
   Widget _buildImageLayout(BuildContext context) {
     return Column(
@@ -90,9 +72,10 @@ class HomePage extends StatelessWidget {
   Widget _buildImageWithBox(BuildContext context) {
     return Container(
       alignment: Alignment.center,
-      padding: const EdgeInsets.all(80),
+      padding: const EdgeInsets.all(0),
       child: Container(
-        width: 400,
+        width: 300,
+        height: 200,
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(12),
@@ -115,10 +98,43 @@ class HomePage extends StatelessWidget {
     );
   }
 
+  Widget _buildButtonGrid(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 40),
+      child: Column(
+        children: [
+          _buildButtonRow(context, 'Images/5.jpg', const Test()), //เช็คสต็อก
+          const SizedBox(height: 20),
+          _buildButtonRow(context, 'Images/NongNINE.jpg',
+              AddProductPage()) //ประวัติการเพิ่ม- ลด
+        ],
+      ),
+    );
+  }
+
+  Widget _buildButtonRow(
+      BuildContext context, String imagePath, Widget targetPage) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        _buildNavButton(
+            context, 'Images/5.jpg', AddProductPage()), // เพิ่มไอเท็ม
+        const SizedBox(height: 20),
+        _buildNavButton(
+            context, 'Images/NongNINE.jpg', AddProductPage()), //ลดไอเท็ม
+      ],
+    );
+  }
+
   Widget _buildNavButton(
-      BuildContext context, String imagePath, VoidCallback onTap) {
+      BuildContext context, String imagePath, Widget targetPage) {
     return GestureDetector(
-      onTap: onTap,
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => targetPage),
+        );
+      },
       child: _buildImageBox(imagePath),
     );
   }
@@ -145,6 +161,24 @@ class HomePage extends StatelessWidget {
           fit: BoxFit.cover,
         ),
       ),
+    );
+  }
+
+  void _showMenu(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      builder: (context) {
+        return Container(
+          height: 200,
+          color: Colors.blue,
+          child: Center(
+            child: Text(
+              'Menu Items',
+              style: TextStyle(color: Colors.white, fontSize: 24),
+            ),
+          ),
+        );
+      },
     );
   }
 }
