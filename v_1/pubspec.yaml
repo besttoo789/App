@@ -1,0 +1,28 @@
+name: v_1
+description: "A new Flutter project."
+publish_to: 'none' # ลบบรรทัดนี้ถ้าคุณต้องการเผยแพร่ไปยัง pub.dev
+
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.5.3
+
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^1.0.8
+  carousel_slider: ^5.0.0
+  google_fonts: ^6.2.1
+  image_picker: ^1.1.2
+  qr_code_scanner: ^1.0.1
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^4.0.0
+  
+flutter:
+  uses-material-design: true
+
+  assets:
+    - images/
