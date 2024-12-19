@@ -4,195 +4,115 @@ import 'AddProductPage.dart';
 import 'package:v_1/HistoryProduct.dart';
 import 'package:v_1/level5.dart';
 
-class LoginPage extends StatelessWidget {
+class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
 
   @override
+  _LoginPageState createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
+  int _selectedIndex = 0;
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
+    int availableStock = 100;
+    int damagedStock = 5;
+
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 253, 255, 253),
-      appBar: AppBar(
-        title: const Text(''),
-        backgroundColor: const Color.fromARGB(255, 241, 4, 32),
-      ),
       body: SingleChildScrollView(
         child: Center(
           child: Container(
-            padding: const EdgeInsets.all(30.0),
+            padding: const EdgeInsets.all(30),
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
               children: <Widget>[
-                // Square image at the top
-                _buildSquareImageWithDescription(
+                const SizedBox(height: 50),
+                _buildSquareBoxWithText(
                   context,
-                  'images/Product.png',
-                  '',
+                  '**********',
+                  'สินค้าคงเหลือ: $availableStock ชิ้น\nสินค้าเสียหาย: $damagedStock ชิ้น',
                   const Level5(),
                 ),
-                const SizedBox(height: 10),
+                const SizedBox(height: 20),
                 const Text(
                   'หมวดหมู่',
                   style: TextStyle(
-                    fontSize: 20,
+                    fontSize: 24,
                     fontWeight: FontWeight.bold,
-                    color: Color.fromARGB(255, 0, 0, 0),
+                    color: Colors.black,
                   ),
                 ),
-                const SizedBox(height: 10),
+                const SizedBox(height: 20),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
-                    Expanded(
-                      child: _buildCircularImageWithDescription(context,
-                          'images/box.png', 'product', ProductListPage()),
-                    ),
+                    _buildCategoryButton(
+                        context, 'images/box.png', 'สินค้า', ProductListPage()),
                     const SizedBox(width: 20),
-                    Expanded(
-                      child: _buildCircularImageWithDescription(
-                        context,
-                        'images/new-product.png',
-                        'new-product.png',
-                        AddProductPage(),
-                      ),
-                    ),
-                    const SizedBox(width: 40),
-                    Expanded(
-                      child: _buildCircularImageWithDescription(
-                        context,
-                        'images/supplier.png',
-                        'History product',
-                        const Level3Page(),
-                      ),
-                    ),
+                    _buildCategoryButton(context, 'images/new-product.png',
+                        'เพิ่มเข้า', AddProductPage()),
+                    const SizedBox(width: 20),
+                    _buildCategoryButton(context, 'images/out-of-stock.png',
+                        'นำออก', AddProductPage()),
                   ],
                 ),
-                const SizedBox(height: 10),
+                const SizedBox(height: 30),
                 const Align(
                   alignment: Alignment.centerLeft,
                   child: Text(
-                    'รายการ',
-                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                    'รายการล่าสุด',
+                    style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
                   ),
                 ),
-                const SizedBox(height: 30),
-                // Level 5 images in grid format
-                Column(
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        _buildSquareImageWithDescription(
-                          context,
-                          'images/9.jpg',
-                          '',
-                          ProductListPage(),
-                          width: 160,
-                          height: 110,
-                        ),
-                        const SizedBox(width: 20),
-                        _buildSquareImageWithDescription(
-                          context,
-                          'images/7.jpg',
-                          '',
-                          const Level5(),
-                          width: 160,
-                          height: 110,
-                        ),
-                      ],
-                    ),
-                    const SizedBox(height: 10),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        _buildSquareImageWithDescription(
-                          context,
-                          'images/8.jpg',
-                          '',
-                          const Level5(),
-                          width: 160,
-                          height: 110,
-                        ),
-                        const SizedBox(width: 20),
-                        _buildSquareImageWithDescription(
-                          context,
-                          'images/7.jpg',
-                          '',
-                          const Level5(),
-                          width: 160,
-                          height: 110,
-                        ),
-                      ],
-                    ),
-                    const SizedBox(height: 10),
+                const SizedBox(height: 40),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    _buildSquareImageWithDescription(context,
+                        'images/new-product.png', '', ProductListPage(),
+                        width: 120, height: 120, withBorder: true),
+                    const SizedBox(width: 20),
+                    _buildSquareImageWithDescription(
+                        context, 'images/new-product.png', '', const Level5(),
+                        width: 120, height: 120, withBorder: true),
                   ],
                 ),
+                const SizedBox(height: 15),
               ],
             ),
           ),
         ),
       ),
-      bottomNavigationBar: BottomAppBar(
-        color: Colors.red,
-        child: Container(
-          height: 30, // ปรับความสูงของ BottomAppBar
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: const [
-              IconButton(
-                onPressed: null,
-                icon: Icon(Icons.home, color: Colors.white),
-                iconSize: 24, // ขนาดของไอคอน
-              ),
-              IconButton(
-                onPressed: null,
-                icon: Icon(Icons.warehouse, color: Colors.white),
-                iconSize: 24, // ขนาดของไอคอน
-              ),
-              IconButton(
-                onPressed: null,
-                icon: Icon(Icons.person, color: Colors.white),
-                iconSize: 24, // ขนาดของไอคอน
-              ),
-            ],
+      bottomNavigationBar: BottomNavigationBar(
+        currentIndex: _selectedIndex,
+        onTap: _onItemTapped,
+        items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            label: 'หน้าหลัก',
           ),
-        ),
-      ),
-    );
-  }
-
-  Widget _buildCircularImageWithDescription(BuildContext context,
-      String imagePath, String description, Widget nextPage) {
-    return GestureDetector(
-      onTap: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => nextPage),
-        );
-      },
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          SizedBox(
-            width: 80,
-            height: 80,
-            child: ClipOval(
-              child: Image.asset(
-                imagePath,
-                fit: BoxFit.cover,
-              ),
-            ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.history),
+            label: 'ประวัติ',
           ),
-          const SizedBox(height: 5),
-          Text(description,
-              style: const TextStyle(fontSize: 14),
-              textAlign: TextAlign.center),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.settings),
+            label: 'การตั้งค่า',
+          ),
         ],
       ),
     );
   }
 
-  Widget _buildSquareImageWithDescription(BuildContext context,
-      String imagePath, String description, Widget nextPage,
+  Widget _buildSquareBoxWithText(
+      BuildContext context, String text, String description, Widget nextPage,
       {double width = 350, double height = 175}) {
     return GestureDetector(
       onTap: () {
@@ -201,24 +121,139 @@ class LoginPage extends StatelessWidget {
           MaterialPageRoute(builder: (context) => nextPage),
         );
       },
+      child: Container(
+        width: width,
+        height: height,
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            colors: [Colors.blue, Colors.blueAccent],
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+          ),
+          borderRadius: BorderRadius.circular(20.0),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black26,
+              blurRadius: 12,
+              offset: Offset(0, 4),
+            ),
+          ],
+        ),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 20.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                text,
+                style: const TextStyle(
+                  fontSize: 20,
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                  letterSpacing: 1.2,
+                ),
+              ),
+              const SizedBox(height: 10),
+              Text(
+                description,
+                style: const TextStyle(
+                  fontSize: 14,
+                  color: Colors.white,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildCategoryButton(
+      BuildContext context, String imagePath, String label, Widget nextPage) {
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => nextPage),
+        );
+      },
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          ClipRRect(
-            borderRadius: BorderRadius.circular(15.0),
-            child: SizedBox(
-              width: width,
-              height: height,
-              child: Image.asset(
-                imagePath,
-                fit: BoxFit.cover,
+          Container(
+            width: 80,
+            height: 80,
+            decoration: BoxDecoration(
+              color: Colors.blue.shade100,
+              borderRadius: BorderRadius.circular(16),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black12,
+                  blurRadius: 8,
+                  offset: Offset(0, 4),
+                ),
+              ],
+            ),
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(16),
+              child: Image.asset(imagePath, fit: BoxFit.cover),
+            ),
+          ),
+          const SizedBox(height: 8),
+          Text(
+            label,
+            style: const TextStyle(
+              fontSize: 14,
+              fontWeight: FontWeight.w500,
+            ),
+            textAlign: TextAlign.center,
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildSquareImageWithDescription(BuildContext context,
+      String imagePath, String description, Widget nextPage,
+      {double width = 120, double height = 120, bool withBorder = false}) {
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => nextPage),
+        );
+      },
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Container(
+            decoration: withBorder
+                ? BoxDecoration(
+                    border: Border.all(
+                      color: Colors.blueAccent,
+                      width: 2,
+                    ),
+                    borderRadius: BorderRadius.circular(20.0),
+                  )
+                : null,
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(20.0),
+              child: SizedBox(
+                width: width,
+                height: height,
+                child: Image.asset(
+                  imagePath,
+                  fit: BoxFit.cover,
+                ),
               ),
             ),
           ),
-          const SizedBox(height: 5),
+          const SizedBox(height: 8),
           Text(description,
-              style: const TextStyle(fontSize: 14),
-              textAlign: TextAlign.center),
+              style:
+                  const TextStyle(fontSize: 16, fontWeight: FontWeight.w500)),
         ],
       ),
     );
