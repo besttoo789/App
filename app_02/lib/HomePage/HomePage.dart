@@ -3,6 +3,23 @@ import 'package:app_02/AddProductPage/AddProduct.dart';
 import 'package:app_02/HistoryPage/HistoryProduct.dart';
 import 'package:app_02/Product/Outfoproduct.dart';
 import 'package:app_02/Product/Product.dart';
+import 'package:barcode_scan2/barcode_scan2.dart';
+import 'package:app_02/HomePage/ShowProduct.dart';
+
+void main() => runApp(const MyApp());
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return const MaterialApp(
+      debugShowCheckedModeBanner: false,
+      title: 'Login App',
+      home: LoginPage(),
+    );
+  }
+}
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -12,7 +29,6 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  int _selectedIndex = 0; // Selected index for the BottomNavigationBar
   List<Product> allProducts = [];
   List<Product> filteredProducts = [];
 
@@ -23,123 +39,158 @@ class _LoginPageState extends State<LoginPage> {
     filteredProducts = allProducts;
   }
 
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
-  }
-
-  // This function determines the widget to display based on the selected tab.
-
   @override
   Widget build(BuildContext context) {
     int availableStock = 100;
     int damagedStock = 5;
+    double screenWidth = MediaQuery.of(context).size.width;
+    double screenHeight = MediaQuery.of(context).size.height;
 
     return Scaffold(
-      backgroundColor: const Color(0xFFF8F9FA),
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.all(30),
-        child: Column(
-          children: <Widget>[
-            const SizedBox(height: 50),
-            _buildSquareBoxWithText(
-              context,
-              'สวัสดีคุณ Besttoo',
-              'สินค้าคงเหลือ: $availableStock ชิ้น\nสินค้าเสียหาย: $damagedStock ชิ้น',
-              AddProductPage(),
-            ),
-            const SizedBox(height: 20),
-            const Text(
-              'หมวดหมู่',
-              style: TextStyle(
-                fontSize: 24,
-                fontWeight: FontWeight.bold,
-                color: Colors.black,
+      appBar: AppBar(
+        title: Text('ระบบจัดการสินค้า'),
+        backgroundColor: Color.fromARGB(255, 255, 255, 255),
+        actions: [
+          IconButton(
+            icon: Icon(Icons.person),
+            onPressed: () {
+              // Handle login button press
+              print('Login button pressed');
+            },
+          ),
+        ],
+      ),
+      body: Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            colors: [
+              const Color.fromARGB(255, 229, 9, 20), // Red color on top
+              Color.fromARGB(255, 245, 245, 241), // White color on bottom
+            ],
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+          ),
+        ),
+        child: SingleChildScrollView(
+          padding: const EdgeInsets.all(30),
+          child: Column(
+            children: <Widget>[
+              const SizedBox(height: 50),
+              _buildSquareBoxWithText(
+                context,
+                'สวัสดีคุณ Besttoo',
+                'สินค้าคงเหลือ: $availableStock ชิ้น\nสินค้าเสียหาย: $damagedStock ชิ้น',
+                AddProductPage(),
+                width: screenWidth * 0.9,
+                height: screenHeight * 0.25,
               ),
-            ),
-            const SizedBox(height: 20),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                _buildCategoryButton(
-                    context, 'images/box.png', 'สินค้า', ProductListPage()),
-                const SizedBox(width: 15),
-                _buildCategoryButton(context, 'images/new-product.png',
-                    'เพิ่มเข้า', AddProductPage()),
-                const SizedBox(width: 15),
-                _buildCategoryButton(context, 'images/out-of-stock.png',
-                    'นำออก', RemoveProductPage()),
-                const SizedBox(width: 15),
-                _buildCategoryButton(
-                    context, 'images/file.png', 'ประวัติ', HistoryPage()),
-              ],
-            ),
-            const SizedBox(height: 20),
-            const SizedBox(height: 20),
-            const Align(
-              alignment: Alignment.centerLeft,
-              child: Text(
-                'รายการล่าสุด',
+              const SizedBox(height: 20),
+              const Text(
+                'หมวดหมู่',
                 style: TextStyle(
-                  fontSize: 22,
+                  fontSize: 24,
                   fontWeight: FontWeight.bold,
-                  color: Colors.black,
+                  color: Color.fromARGB(255, 0, 0, 0),
                 ),
               ),
-            ),
-            const SizedBox(height: 20),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                _buildSquareImageWithDescription(
-                    context, 'images/new-product.png', '', ProductListPage(),
-                    width: 120, height: 120, withBorder: true),
-                const SizedBox(width: 20),
-                _buildSquareImageWithDescription(
-                    context, 'images/new-product.png', '', AddProductPage(),
-                    width: 120, height: 120, withBorder: true),
-              ],
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                _buildSquareImageWithDescription(
-                    context, 'images/new-product.png', '', ProductListPage(),
-                    width: 120, height: 120, withBorder: true),
-                const SizedBox(width: 20),
-                _buildSquareImageWithDescription(
-                    context, 'images/new-product.png', '', AddProductPage(),
-                    width: 120, height: 120, withBorder: true),
-              ],
-            ),
-            const SizedBox(height: 15),
-          ],
+              const SizedBox(height: 20),
+              Container(
+                padding: const EdgeInsets.all(10),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(16),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black12,
+                      blurRadius: 8,
+                      offset: Offset(0, 4),
+                    ),
+                  ],
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    _buildCategoryButton(
+                        context, 'images/box.png', 'สินค้า', ProductListPage()),
+                    const SizedBox(width: 15),
+                    _buildCategoryButton(context, 'images/new-product.png',
+                        'เพิ่มเข้า', AddProductPage()),
+                    const SizedBox(width: 15),
+                    _buildCategoryButton(context, 'images/out-of-stock.png',
+                        'นำออก', Outfoproduct()),
+                    const SizedBox(width: 15),
+                    _buildCategoryButton(
+                        context, 'images/file.png', 'ประวัติ', HistoryPage()),
+                  ],
+                ),
+              ),
+              const SizedBox(height: 20),
+              const Align(
+                alignment: Alignment.centerLeft,
+                child: Text(
+                  'รายการล่าสุด',
+                  style: TextStyle(
+                    fontSize: 22,
+                    fontWeight: FontWeight.bold,
+                    color: Color.fromARGB(255, 34, 31, 31),
+                  ),
+                ),
+              ),
+              const SizedBox(height: 20),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  _buildSquareImageWithDescription(
+                      context,
+                      'images/new-product.png',
+                      '',
+                      ShowProduct(
+                          productName: 'สินค้า A',
+                          productDescription: 'รายละเอียดสินค้า A',
+                          productPrice: 100.0,
+                          productImage: 'images/new-product.png'),
+                      width: screenWidth * 0.3,
+                      height: screenHeight * 0.15,
+                      withBorder: true),
+                  const SizedBox(width: 20),
+                  _buildSquareImageWithDescription(
+                      context, 'images/new-product.png', '', AddProductPage(),
+                      width: screenWidth * 0.3,
+                      height: screenHeight * 0.15,
+                      withBorder: true),
+                ],
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  _buildSquareImageWithDescription(
+                      context, 'images/new-product.png', '', ProductListPage(),
+                      width: screenWidth * 0.3,
+                      height: screenHeight * 0.15,
+                      withBorder: true),
+                  const SizedBox(width: 20),
+                  _buildSquareImageWithDescription(
+                      context, 'images/new-product.png', '', AddProductPage(),
+                      width: screenWidth * 0.3,
+                      height: screenHeight * 0.15,
+                      withBorder: true),
+                ],
+              ),
+              const SizedBox(height: 15),
+            ],
+          ),
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
-        child: const Icon(Icons.barcode_reader, color: Colors.white),
-        backgroundColor: Colors.red,
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: _selectedIndex, // Current selected index
-        onTap: _onItemTapped, // Callback for tab change
-        items: <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(Icons.shopping_cart),
-            backgroundColor: Colors.red,
-            label: 'สินค้า',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.add_box),
-            label: 'เพิ่มสินค้า',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.history),
-            label: 'ประวัติ',
-          ),
-        ],
+        onPressed: () async {
+          var result = await BarcodeScanner.scan();
+          if (result.type == ResultType.Barcode) {
+            // Handle the scanned barcode result here
+            print('Scanned barcode: ${result.rawContent}');
+          }
+        },
+        child: const Icon(Icons.qr_code, color: Colors.white),
+        backgroundColor: Color.fromARGB(255, 229, 9, 20),
       ),
     );
   }
@@ -159,7 +210,10 @@ class _LoginPageState extends State<LoginPage> {
         height: height,
         decoration: BoxDecoration(
           gradient: LinearGradient(
-            colors: [Colors.white, Colors.red.shade100],
+            colors: [
+              const Color.fromARGB(255, 245, 245, 241),
+              Color.fromARGB(255, 245, 245, 241),
+            ],
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
           ),
@@ -182,7 +236,7 @@ class _LoginPageState extends State<LoginPage> {
                 text,
                 style: const TextStyle(
                   fontSize: 20,
-                  color: Colors.black,
+                  color: Color.fromARGB(255, 34, 31, 31),
                   fontWeight: FontWeight.bold,
                   letterSpacing: 1.2,
                 ),
@@ -192,7 +246,7 @@ class _LoginPageState extends State<LoginPage> {
                 description,
                 style: const TextStyle(
                   fontSize: 14,
-                  color: Colors.black,
+                  color: Color.fromARGB(255, 34, 31, 31),
                   fontWeight: FontWeight.w500,
                 ),
               ),
@@ -216,10 +270,9 @@ class _LoginPageState extends State<LoginPage> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Container(
-            width: 60,
+            width: 55,
             height: 60,
             decoration: BoxDecoration(
-              color: Colors.red.shade100,
               borderRadius: BorderRadius.circular(16),
               boxShadow: [
                 BoxShadow(
