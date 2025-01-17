@@ -4,7 +4,7 @@ import 'package:app_02/HistoryPage/HistoryProduct.dart';
 import 'package:app_02/Product/Outfoproduct.dart';
 import 'package:app_02/Product/Product.dart';
 import 'package:barcode_scan2/barcode_scan2.dart';
-import 'package:app_02/HomePage/ShowProduct.dart';
+import 'package:app_02/Product/ProductDetails.dart';
 
 void main() => runApp(const MyApp());
 
@@ -29,16 +29,6 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  List<Product> allProducts = [];
-  List<Product> filteredProducts = [];
-
-  @override
-  void initState() {
-    super.initState();
-    allProducts = getProductsFromDatabase();
-    filteredProducts = allProducts;
-  }
-
   @override
   Widget build(BuildContext context) {
     int availableStock = 100;
@@ -78,8 +68,8 @@ class _LoginPageState extends State<LoginPage> {
               const SizedBox(height: 50),
               _buildSquareBoxWithText(
                 context,
-                'สวัสดีคุณ Besttoo',
-                'สินค้าคงเหลือ: $availableStock ชิ้น\nสินค้าเสียหาย: $damagedStock ชิ้น',
+                'สวัสดีคุณ : $availableStock',
+                'สินค้าคงทั้งหมด: $availableStock ชิ้น\nสินค้าเสียหาย: $damagedStock ชิ้น',
                 AddProductPage(),
                 width: screenWidth * 0.9,
                 height: screenHeight * 0.25,
@@ -142,19 +132,23 @@ class _LoginPageState extends State<LoginPage> {
                 children: <Widget>[
                   _buildSquareImageWithDescription(
                       context,
-                      'images/new-product.png',
+                      'https://ihcupload.s3.ap-southeast-1.amazonaws.com/img/product/products65208_800.jpg',
                       '',
                       ShowProduct(
                           productName: 'สินค้า A',
                           productDescription: 'รายละเอียดสินค้า A',
-                          productPrice: 100.0,
-                          productImage: 'images/new-product.png'),
+                          productUnit: 100.0,
+                          productImage:
+                              'https://static1.howtogeekimages.com/wordpress/wp-content/uploads/2024/04/53366612939_4a328f5233_o.jpg'),
                       width: screenWidth * 0.3,
                       height: screenHeight * 0.15,
                       withBorder: true),
                   const SizedBox(width: 20),
                   _buildSquareImageWithDescription(
-                      context, 'images/new-product.png', '', AddProductPage(),
+                      context,
+                      'https://static1.howtogeekimages.com/wordpress/wp-content/uploads/2024/04/53366612939_4a328f5233_o.jpg',
+                      '',
+                      AddProductPage(),
                       width: screenWidth * 0.3,
                       height: screenHeight * 0.15,
                       withBorder: true),
@@ -164,13 +158,19 @@ class _LoginPageState extends State<LoginPage> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   _buildSquareImageWithDescription(
-                      context, 'images/new-product.png', '', ProductListPage(),
+                      context,
+                      'https://gi.lnwfile.com/brgn7y.webp',
+                      '',
+                      ProductListPage(),
                       width: screenWidth * 0.3,
                       height: screenHeight * 0.15,
                       withBorder: true),
                   const SizedBox(width: 20),
                   _buildSquareImageWithDescription(
-                      context, 'images/new-product.png', '', AddProductPage(),
+                      context,
+                      'https://gi.lnwfile.com/brgn7y.webp',
+                      '',
+                      AddProductPage(),
                       width: screenWidth * 0.3,
                       height: screenHeight * 0.15,
                       withBorder: true),
@@ -330,7 +330,7 @@ class _LoginPageState extends State<LoginPage> {
               child: SizedBox(
                 width: width,
                 height: height,
-                child: Image.asset(
+                child: Image.network(
                   imagePath,
                   fit: BoxFit.cover,
                 ),
@@ -348,18 +348,4 @@ class _LoginPageState extends State<LoginPage> {
       ),
     );
   }
-}
-
-List<Product> getProductsFromDatabase() {
-  return [
-    Product(name: 'สินค้า A', stock: 50),
-    Product(name: 'สินค้า B', stock: 20),
-  ];
-}
-
-class Product {
-  final String name;
-  final int stock;
-
-  Product({required this.name, required this.stock});
 }

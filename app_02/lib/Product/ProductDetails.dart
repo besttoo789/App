@@ -3,13 +3,13 @@ import 'package:flutter/material.dart';
 class ShowProduct extends StatelessWidget {
   final String productName;
   final String productDescription;
-  final double productPrice;
+  final double productUnit;
   final String productImage;
 
   ShowProduct({
     required this.productName,
     required this.productDescription,
-    required this.productPrice,
+    required this.productUnit,
     required this.productImage,
   });
 
@@ -24,12 +24,8 @@ class ShowProduct extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Center(
-              child: Image.network(
-                productImage,
-                height: 200,
-                fit: BoxFit.cover,
-              ),
+            Image.network(
+              'https://media1.giphy.com/media/1OrIIOIcRTDaNidc5p/giphy.gif?cid=6c09b952sgwn7px1x88rlvp95ta0b2fhcrr8oxtfks85dt7b&ep=v1_gifs_search&rid=giphy.gif&ct=g',
             ),
             SizedBox(height: 16),
             Text(
@@ -41,10 +37,10 @@ class ShowProduct extends StatelessWidget {
             ),
             SizedBox(height: 8),
             Text(
-              '\$${productPrice.toStringAsFixed(2)}',
+              'จำนวนในสต็อก: $productUnit',
               style: TextStyle(
                 fontSize: 20,
-                color: Colors.green,
+                color: const Color.fromARGB(255, 0, 0, 0),
               ),
             ),
             SizedBox(height: 16),
