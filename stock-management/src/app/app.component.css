@@ -1,0 +1,198 @@
+:host {
+    display: block;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Header styles */
+header {
+    background-color: #B82132;
+    color: white;
+    width: 100%;
+    left: 50%;
+    padding: 1rem 0;
+    text-align: center;
+    font-size: 16px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* เพิ่มเงาให้กับ header */
+}
+
+/* Container styles */
+.container {
+    display: flex;
+    margin: 20px;
+}
+
+/* Sidebar styles */
+#sidebar {
+    width: 250px; /* ขยายขนาดของ sidebar */
+    background-color: #F6DED8;
+    padding: 20px;
+    box-shadow: 4px 0 10px rgba(0, 0, 0, 0.1); /* เพิ่มเงาให้ด้านข้างของ sidebar */
+    height: auto; /* ทำให้ sidebar ยืดตามความสูงของหน้าจอ */
+    position: 50px; /* ทำให้ sidebar ค้างที่ด้านซ้าย */
+    top: 0;
+    left: 0;
+    transition: transform 0.3s ease-in-out; /* เพิ่มการเคลื่อนไหวในการแสดงผล */
+}
+
+/* เมื่อ sidebar ถูกปิด (ตัวอย่างการใช้ class ที่จะเปิด/ปิด sidebar) */
+#sidebar.closed {
+    transform: translateX(-250px); /* ซ่อน sidebar ออกไปจากหน้าจอ */
+}
+
+#sidebar ul {
+    list-style: none;
+    padding: 0;
+}
+
+#sidebar ul li {
+    margin: 15px 0;
+}
+
+#sidebar ul li a {
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+    font-size: 18px;
+    display: block;
+    padding: 10px;
+    border-radius: 4px; /* ทำให้มุมของลิงก์กลม */
+    transition: background-color 0.3s ease; /* การเปลี่ยนสีพื้นหลังเมื่อโฮเวอร์ */
+}
+
+/* เมื่อโฮเวอร์บนลิงก์ */
+#sidebar ul li a:hover {
+    background-color: #B82132;
+    color: white; /* เปลี่ยนสีข้อความเป็นขาวเมื่อ hover */
+}
+
+#sidebar ul li a.active {
+    background-color: #B82132; /* เปลี่ยนสีพื้นหลังลิงก์ที่เลือก */
+    color: white;
+}
+
+/* เพิ่มความยืดหยุ่นของเนื้อหาภายใน sidebar */
+#sidebar h2 {
+    font-size: 22px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+/* เพิ่มไอคอนให้ดูดีขึ้น */
+#sidebar .icon {
+    font-size: 24px;
+    margin-right: 10px;
+    color: #B82132;
+}
+
+/* Main content styles */
+main {
+    flex: 1;
+    background-color: #fff;
+    padding: 20px;
+    margin-left: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.15); /* เพิ่มเงาให้กับ main */
+}
+
+/* Stock chart styles */
+#stock-chart {
+    margin-top: 20px;
+}
+
+#stock-chart canvas {
+    width: 100%;
+    max-width: 600px;
+    height: 400px;
+    margin: 0 auto;
+    display: block;
+}
+
+/* Footer styles */
+footer {
+    text-align: center;
+    padding: 10px;
+    background-color: #333;
+    color: #fff;
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1); /* เพิ่มเงาให้กับ footer */
+}
+
+/* Button styles */
+button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 4px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* เพิ่มเงาให้กับปุ่ม */
+}
+
+button:hover {
+    background-color: #45a049;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* เพิ่มเงาเมื่อโฮเวอร์ */
+}
+
+/* Table styles */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+table, th, td {
+    border: 1px solid #ddd;
+}
+
+th, td {
+    padding: 10px;
+    text-align: left;
+}
+
+th {
+    background-color: #f4f4f4;
+}
+
+/* Form styles */
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+form label {
+    margin-top: 10px;
+}
+
+form input {
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* เพิ่มเงาให้กับ input */
+}
+
+form button {
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #333;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* เพิ่มเงาให้กับปุ่มในฟอร์ม */
+}
+
+form button:hover {
+    background-color: #555;
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.3); /* เพิ่มเงาเมื่อโฮเวอร์ */
+}
