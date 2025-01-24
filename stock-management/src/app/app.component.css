@@ -31,7 +31,7 @@ header {
     padding: 20px;
     box-shadow: 4px 0 10px rgba(0, 0, 0, 0.1); /* เพิ่มเงาให้ด้านข้างของ sidebar */
     height: auto; /* ทำให้ sidebar ยืดตามความสูงของหน้าจอ */
-    position: 50px; /* ทำให้ sidebar ค้างที่ด้านซ้าย */
+    position: auto; /* ทำให้ sidebar ค้างที่ด้านซ้าย */
     top: 0;
     left: 0;
     transition: transform 0.3s ease-in-out; /* เพิ่มการเคลื่อนไหวในการแสดงผล */
@@ -183,16 +183,18 @@ form input {
 
 form button {
     margin-top: 20px;
-    padding: 10px;
-    background-color: #333;
+    padding: 12px 20px;
+    background: linear-gradient(45deg, #333, #555);
     color: #fff;
     border: none;
     border-radius: 5px;
     cursor: pointer;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* เพิ่มเงาให้กับปุ่มในฟอร์ม */
+    font-size: 16px;
+    transition: background 0.3s ease, box-shadow 0.3s ease;
 }
 
 form button:hover {
-    background-color: #555;
+    background: linear-gradient(45deg, #555, #777);
     box-shadow: 0 6px 10px rgba(0, 0, 0, 0.3); /* เพิ่มเงาเมื่อโฮเวอร์ */
 }
