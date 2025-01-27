@@ -1,1 +1,19 @@
-/* This file is intentionally left blank. */
+.container {
+    max-width: 600px;
+    margin: auto;
+    padding: 20px;
+    background-color: #f8f9fa;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+    text-align: center;
+    color: #343a40;
+}
+
+.btn-primary {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+}
