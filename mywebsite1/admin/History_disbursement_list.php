@@ -36,11 +36,11 @@ $rs = $query->fetchAll();
                   <thead>
                 <tr>
                     <th width="5%" class="text-center">ID.</th>
-                    <th width="28%" class="text-center" >รหัสการเบิก-จ่าย</th>
-                    <th width="25%" class="text-center" >ผู้ทำรายการ</th>
+                    <th width="23%" class="text-center" >รหัสการเบิก-จ่าย</th>
+                    <th width="20%" class="text-center" >ผู้ทำรายการ</th>
                     <th width="7%" class="text-center" >เลขสินค้า</th>
                     <th width="5%" class="text-center" >จำนวน</th>
-                    <th width="5%" class="text-center" >สถานะ</th>
+                    <th width="15%" class="text-center" >สถานะ</th>
                     <th width="10%" class="text-center" >วันที่ยืม</th>
                 </tr>
                   </thead>

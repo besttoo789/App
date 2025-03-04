@@ -2,7 +2,7 @@
     <strong> <a href="" style="color: red;">MIS-SCHOOL</a></strong>
     PROGRESSIVE NETWORK CONSULT CO.LD.
     <div class="float-right d-none d-sm-inline-block">
-      <b>Version </b> 3.2.0
+      <b>Version </b> 1.0.0
     </div>
   </footer>
 

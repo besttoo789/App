@@ -20,6 +20,8 @@ if(isset($_POST['username']) && isset($_POST['password']) && $_POST['action'] ==
     $stmtLogin->bindParam(':password', $password , PDO::PARAM_STR);
     $stmtLogin->execute();
 
+
+
     // echo $stmtLogin->rowCount();
     // exit;  
 
@@ -39,7 +41,7 @@ if(isset($_POST['username']) && isset($_POST['password']) && $_POST['action'] ==
         // print_r($_SESSION);
         // exit();
  
-        $conn = null; //close connect db
+        $condb = null; //close connect db
 
         if ($_SESSION['m_level'] == 'admin') { //admin
             header('Location: admin/');  
@@ -67,7 +69,7 @@ if(isset($_POST['username']) && isset($_POST['password']) && $_POST['action'] ==
         </script>';
     } //else
 }
-print_r($_SESSION);
+// print_r($_SESSION);
 ?> 
 
 

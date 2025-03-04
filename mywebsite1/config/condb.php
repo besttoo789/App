@@ -1,4 +1,10 @@
 <?php
+// $servername = "localhost";
+// $username = "root";
+// $password = ""; //ถ้าไม่ได้ตั้งรหัสผ่านให้ลบ yourpassword ออก
+
+
+
 $servername = "192.168.1.45";
 $username = "newmos1";
 $password = "newmos1"; //ถ้าไม่ได้ตั้งรหัสผ่านให้ลบ yourpassword ออก

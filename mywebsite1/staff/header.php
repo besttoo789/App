@@ -1,23 +1,23 @@
 <?php
 
-
+session_start();
 if(empty($_SESSION['m_level']) && empty($_SESSION['staff_id'])){
-  header('Location: ../logout.php');
+    header('Location: ../logout.php');
 }
 
-// ถ้าไม่ใช่ admin ให้กลับไปหน้า login
-if ($_SESSION['m_level'] != 'staff') {
-  header('Location: ../logout.php');
+if(isset($_SESSION['m_level'])&& isset($_SESSION['staff_id']) && $_SESSION['m_level'] != 'staff'){
+    header('Location: ../logout.php');
 }
-require_once '../config/condb.php';
+
+
+ require_once '../config/condb.php';
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Staff | Dashboard</title>
+  <title>AdminLTE 3 | Dashboard</title>
 
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">

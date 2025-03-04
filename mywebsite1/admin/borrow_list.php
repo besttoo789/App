@@ -1,29 +1,13 @@
 <?php
-// query ข้อมูลสมาชิก
 $queryBorrow = $condb->prepare("SELECT * FROM product_changes
 ");
 $queryBorrow->execute();
 $rsBorrow = $queryBorrow->fetchAll();
-
-// echo'<pre>';
-// $queryBorrow->debugDumpParams();
-// exit;
 ?>
-<!-- Content Wrapper. Contains page content -->
+
 <div class="content-wrapper">
-  <!-- Content Header (Page header) -->
-  <section class="content-header">
-    <div class="container-fluid">
-      <div class="row mb-2">
-        <div class="col-sm-6">
-          <h1>จัดการข้อมูลสมาชิก
-          <a href="member.php?act=add" class="btn btn-primary">เพิ่มข้อมูล</a>
-        </h1>
-        </div>
-      </div>
-    </div><!-- /.container-fluid -->
-  </section>
-  <!-- Main content -->
+
+
   <section class="content">
     <div class="container-fluid">
       <div class="row">
@@ -69,21 +53,9 @@ $rsBorrow = $queryBorrow->fetchAll();
                 </tr>
                   <?php } ?>
                 </tbody>
-
-                <!-- <tfoot>
-                <tr>
-                  <th>Rendering engine</th>
-                  <th>Browser</th>
-                  <th>Platform(s)</th>
-                  <th>Engine version</th>
-                  <th>CSS grade</th>
-                </tr>
-                </tfoot> -->
               </table>
             </div>
-            <!-- /.card-body -->
           </div>
-          <!-- /.card -->
         </div>
         <!-- /.col -->
       </div>

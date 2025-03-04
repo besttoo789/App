@@ -19,7 +19,7 @@
           </h1>
           </div>
         </div>
-      </div><!-- /.container-fluid -->
+      </div>
     </section>
     <!-- Main content -->
     <section class="content">
@@ -34,13 +34,14 @@
                   <thead>
                   <tr>
                     <th width="5%" class="scope">ID.</th>
-                    <th width="28%"class="text-center">ชื่อสินค้า</th>
-                    <th width="25%"class="text-center">ประเภท</th>
+                    <th width="23%"class="text-center">ชื่อสินค้า</th>
+                    <th width="20%"class="text-center">ประเภท</th>
                     <th width="7%"class="text-center">จำนวน</th>
                     <th width="5%"class="text-center">Barcode</th>
-                    <th width="5%"class="text-center">สถานะ</th>
+                    <th width="10%"class="text-center">สถานะ</th>
                     <th width="5%"class="text-center">เวลาเพิ่ม</th>
                     <th width="5%"class="text-center">อัพเดทล่าสุด</th>
+                    <th width="5%"class="text-center">ลบ</th>
                     
                   </tr>
                   </thead>
@@ -63,6 +64,9 @@
                     </td>
                     <td align="center"><?=$row['created_at'];?></td>
                     <td align="center"><?=$row['updated_at'];?></td>
+                    </td>
+                    <td align="center">
+                    <a href="product.php?id=<?=$row['product_id'];?>&act=delete" class="btn btn-danger btn-sm" onclick="return confirm('ยืนยันการลบข้อมูล ?');">ลบ</a>
                     </td>
                   </tr>
                     <?php } ?>
